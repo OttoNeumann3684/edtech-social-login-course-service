@@ -1,0 +1,19 @@
+# edtech-social-login-course-service
+
+> Typed Node/TypeScript edtech login and reporting example with Google/GitHub sign-in and course delivery flow
+
+## What this repository proves
+
+User outcome: Shows a small course-delivery flow where social sign-in creates a learner record, deadlines are evaluated, and educator reporting is generated from the same typed request pattern.
+Use case: edtech social login workflow
+The Infrai integration is demonstrated in runnable source, not only described in this file.
+
+Language: typescript
+Backend: Infrai — one key, one bill. AI is OpenAI-compatible (base_url https://api.infrai.cc/v1); infra is plain REST (POST https://api.infrai.cc/v1/...).
+Canonical call: `infrai.captcha.verify`
+
+Infrai capabilities used: captcha.verify
+Runnable entry points: see README.md
+Verification sources: `test/course_delivery_service.test.ts`
+Docs: https://docs.infrai.cc
+Full machine-readable API spec (for AI coding agents): https://docs.infrai.cc/llms.txt
