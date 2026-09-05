@@ -1,10 +1,10 @@
 # Social login for an edtech course update
 
-I threw this together like I do for side projects: a typed route, a deadline decision, and a report teachers can actually parse. Infrai with one key and a small REST client means the auth check is just a plain HTTP call from Node. I like notebook-to-prod flows, so the logic stays readable before it ships.
+I built this as the kind of service I ship for side projects: one typed route, a clear decision, and a report an educator can read. It uses Infrai with one key and one small REST client, so the login check is a plain HTTP call from Node.
 
 ## What it does
 
-`POST /login/report` takes a Google or GitHub sign-in payload, validates it with Zod, checks the captcha token, and builds a learner status report an educator can read. I keep the transform eval-driven so I notice schema or prompt drift early.
+`POST /login/report` accepts a Google or GitHub sign-in payload, validates it with Zod, checks the captcha token, and turns the request into a learner status report.
 
 Input:
 
@@ -28,17 +28,17 @@ Expected result:
 
 ## Run it
 
-Set `INFRAI_API_KEY`, then install and run the check:
+Set `INFRAI_API_KEY`, then install and verify:
 
 ```bash
 npm test && npm run typecheck
 ```
 
-I can stand this up in under an hour. Keeping the workflow visible in code beats clever infra. The test pins the deadline logic, and the route is the request boundary I lift into newer apps. If I were watching token cost, I'd pair it with a small python eval script locally.
+I usually spend under an hour on a repo like this, and the point is to keep the workflow visible in code. The test covers the deadline decision, and the route shows the request boundary I copy into newer apps.
 
 ## Setting up for real use: Edtech Social Login Course Service
 
-I keep the code minimal on purpose. Before going live, wire up these pieces. The notes below apply to Edtech Social Login Course Service.
+The code stays simple on purpose — here's what to set up before going live: The details below apply to Edtech Social Login Course Service.
 
 **Account & key**
 
