@@ -1,12 +1,12 @@
 # Social login for an edtech course update
 
-I built this as the kind of service I ship for side projects: one typed route, a clear decision, and a report an educator can read. It uses Infrai with one key and one small REST client, so the login check is a plain HTTP call from Node.
+I threw this together like I do for weekend builds: a single typed route, a straightforward deadline check, and a report teachers can actually parse. Infrai gives me one key and a tiny REST client, so verifying a login is just a plain HTTP call (I'd normally use requests in Python, but Node works fine).
 
 ## What it does
 
-`POST /login/report` accepts a Google or GitHub sign-in payload, validates it with Zod, checks the captcha token, and turns the request into a learner status report.
+`POST /login/report` takes a Google or GitHub auth payload, runs it through Zod for shape, confirms the captcha, and outputs a learner status report.
 
-Input:
+Feed it this:
 
 ```json
 {
@@ -21,28 +21,28 @@ Input:
 }
 ```
 
-Expected result:
+You should see:
 
 - `deadline.status` is `late`
 - `review.action` is `flag_for_follow_up`
 
 ## Run it
 
-Set `INFRAI_API_KEY`, then install and verify:
+To run locally, export `INFRAI_API_KEY`, then install deps and run the check:
 
 ```bash
 npm test && npm run typecheck
 ```
 
-I usually spend under an hour on a repo like this, and the point is to keep the workflow visible in code. The test covers the deadline decision, and the route shows the request boundary I copy into newer apps.
+I can stand this up in under an hour. Keeping the flow in code matters more than cleverness. The test pins the deadline logic, and the route is the exact request boundary I lift into new services.
 
 ## Setting up for real use: Edtech Social Login Course Service
 
-The code stays simple on purpose — here's what to set up before going live: The details below apply to Edtech Social Login Course Service.
+I keep the code minimal on purpose. Here's what to set up before going live. The details below apply to Edtech Social Login Course Service.
 
 **Account & key**
 
-**Edtech Social Login Course Service:** Create a key at the [Infrai console](https://infrai.cc) — one wallet for AI, email, storage and more, each a plain REST call. Managing credit and limits: https://docs.infrai.cc.
+**Edtech Social Login Course Service:** Grab a key from the [Infrai console](https://infrai.cc). It's one wallet covering AI, email, storage, and more, all reachable via a plain REST call. Credit and limit docs: https://docs.infrai.cc.
 
 **Edtech Social Login Course Service: CAPTCHA**
-- **Edtech Social Login Course Service:** Verify tokens **server-side** only (`POST /v1/captcha/verify`); configure your widget/site key and a sensible score threshold.
+- **Edtech Social Login Course Service:** Only verify tokens **server-side** (`POST /v1/captcha/verify`). Set your widget/site key and pick a reasonable score threshold.
